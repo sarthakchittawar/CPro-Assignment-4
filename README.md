@@ -20,6 +20,7 @@ The input files should be stored in the same directory as the executable files, 
 The output(s) of the programs will either be printed on terminal after execution, or stored as a file in the same directory. (depending on the question)
 
 * Some codes (Eg: [Q5 Encrypt/Decrypt](./S3)) may take long time for execution for large data inputs, but they do work properly.
+* The code used for plotting the curve for approximate variance is [graph.c](./S2/graph.c)
 
 
 ### Shortcut links:
