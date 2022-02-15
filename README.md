@@ -21,6 +21,7 @@ The output(s) of the programs will either be printed on terminal after execution
 
 * Some codes (Eg: [Q5 Encrypt/Decrypt](./S3)) may take long time for execution for large data inputs, but they do work properly.
 * The code used for plotting the curve for approximate variance is [graph.c](./S2/graph.c)
+* Report.pdf in [S1](./S1), [S2](./S2) & [S3](./S3) has the necessary explanation & details for those subsets of problems in the assignment.
 
 
 ### Shortcut links:
