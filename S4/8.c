@@ -1,89 +1,96 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
-#define MAXSIZE 15
-
-int read2();
-
-int read1(FILE *f1, FILE *f2, FILE *f3, char b[])
-{
-    char a[MAXSIZE];
-    if (fscanf(f1, "%s", a) != EOF)
-    {
-        if (strcmp(a, b) <= 0)
-        {
-            fprintf(f3, "%s\n", a);
-            read1(f1, f2, f3, b);
-        }
-        else
-        {
-            fprintf(f3, "%s\n", b);
-            read2(f1, f2, f3, a);
-        }
-    }
-    else
-    {
-        fprintf(f3, "%s\n", b);
-        return 1;
-    }
-}
-
-int read2(FILE *f1, FILE *f2, FILE *f3, char a[])
-{
-    char b[MAXSIZE];
-    if (fscanf(f2, "%s", b) != EOF)
-    {
-        if (strcmp(a, b) <= 0)
-        {
-            fprintf(f3, "%s\n", a);
-            read1(f1, f2, f3, b);
-        }
-        else
-        {
-            fprintf(f3, "%s\n", b);
-            read2(f1, f2, f3, a);
-        }
-    }
-    else
-    {
-        fprintf(f3, "%s\n", a);
-        return 2;
-    }
-}
+#define MAXLEN 15
 
 int main(int argc, char *argv[])
 {
-    FILE *f1, *f2, *f3, *final;
-    int fin;
+    FILE *f1, *f2, *f3;
 
     f1 = fopen(argv[1], "r");
     f2 = fopen(argv[2], "r");
     f3 = fopen(argv[3], "w");
 
-    char a[MAXSIZE], b[MAXSIZE];
-    fscanf(f1, "%s", a);
-    fscanf(f2, "%s", b);
-    if (strcmp(a, b) <= 0)
+    char temp[MAXLEN];
+    char new[MAXLEN];
+    int flag = 0;
+    if (fscanf(f1, "%s", temp) == EOF)
     {
-        fprintf(f3, "%s\n", a);
-        fin = read1(f1, f2, f3, b);
+        flag = 1;
+    }
+    if (fscanf(f2, "%s", new) == EOF)
+    {
+        flag = 2;
+    }
+    if (flag == 1)
+    {
+        fprintf(f3, "%s\n", new);
+    }
+    else if (flag == 2)
+    {
+        fprintf(f3, "%s\n", temp);
     }
     else
     {
-        fprintf(f3, "%s\n", b);
-        fin = read2(f1, f2, f3, a);
+        if (strcmp(temp, new) <= 0)
+        {
+            fprintf(f3, "%s\n", temp);
+            strcpy(temp, new);
+        }
+        else
+        {
+            fprintf(f3, "%s\n", new);
+            FILE *fn = f2;
+            f2 = f1;
+            f1 = fn;
+        }
+        int a = 0, b = 0;
+        flag = 0;
+    begin:
+
+        while ((a = fscanf(f1, "%s", new)) != EOF && strcmp(new, temp) <= 0)
+        {
+            fprintf(f3, "%s\n", new);
+        }
+        if (a == -1)
+        {
+            flag = 1;
+        }
+
+        fprintf(f3, "%s\n", temp);
+        strcpy(temp, new);
+
+        while ((b = fscanf(f2, "%s", new)) != EOF && strcmp(new, temp) <= 0)
+        {
+            fprintf(f3, "%s\n", new);
+        }
+        if (b == -1)
+        {
+            flag = 2;
+        }
+
+        fprintf(f3, "%s\n", temp);
+        strcpy(temp, new);
+        if (flag == 1)
+        {
+            while (fscanf(f2, "%s", temp) != EOF)
+            {
+                fprintf(f3, "%s\n", temp);
+            }
+        }
+        else if (flag == 2)
+        {
+            while (fscanf(f1, "%s", temp) != EOF)
+            {
+                fprintf(f3, "%s\n", temp);
+            }
+        }
+        else
+        {
+            goto begin;
+        }
     }
-    if (fin == 2)
-    {
-        final = f1;
-    }
-    else
-    {
-        final = f2;
-    }
-    while (fscanf(final, "%s", a) != EOF)
-    {
-        fprintf(f3, "%s\n", a);
-    }
+    fclose(f1);
+    fclose(f2);
+    fclose(f3);
 }
