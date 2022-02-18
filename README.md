@@ -58,4 +58,4 @@ Collection of all files (.c as well as .pdf) required for the assignment submiss
 10. [S4 - 8.c](./S4/8.c) -
     * ```$ gcc 8.c```\
       ```$ ./a.out file1.txt file2.txt sorted.txt```
-    * *Here, file1.txt & file2.txt are 2 sorted files (Max word length = 15 & Max data size = 15Mb) & sorted.txt is the output file after combining both files.
+    * *Here, file1.txt & file2.txt are 2 sorted files (Max word length = 15 & Max data size = 15Mb) & sorted.txt is the output file after combining both files.*
