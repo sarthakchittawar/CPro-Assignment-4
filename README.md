@@ -46,6 +46,7 @@ Collection of all files (.c as well as .pdf) required for the assignment submiss
    * ```$ gcc 5c_decrypt.c```\
      ```$ ./a.out key.txt encrypted.txt output.txt```
    * *Encryption/Decryption has no file size-limit, but computing time will increase as data size of input.txt increases.*
+   * Also, Encryption/Decryption will work for several input file extentions such as **.txt, .pdf, .mp3, .mp4, .png, etc.**
 8. [S4 - 6.c](./S4/6.c) -
    * ```$ gcc 6.c```\
      ```$ ./a.out charcount.txt file1.txt file2.txt ... filen.txt```
